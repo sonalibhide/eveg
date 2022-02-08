@@ -1,7 +1,4 @@
 /*Common CSS to be shown on all versions (mobile/desktop)*/
-.productBasketDiv{
-    width: 8em;
-}
 
 button{
     background-color: var(--colour-2);
@@ -9,23 +6,12 @@ button{
     font-size: 100%;
 }
 
-.shop-product-img img{
-    width: 8rem;
-    height: 8rem;
-    object-fit: cover;
-    vertical-align: middle;
-}
-.shop-product-desc{
-    display:none;
+h1{
+    text-align: center;
+    font-size: xxx-large;
 }
 
-.shop-product{
-    font-size: 200%;
-}
 
-.shop-product-price{
-    float:left;
-}
 
 .searchbuttons span{
     color: white;
@@ -83,11 +69,6 @@ html{
 }
 
 
-.shop-product{
-    width: 20%;
-    float: left;
-
-}
 
 .menu{
     position:absolute;

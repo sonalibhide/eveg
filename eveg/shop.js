@@ -6,19 +6,25 @@ let basket = {};
 //the element in the imagesArr (see fruit.js)
 //The classes can be styled using CSS
 //The adjustDown and adjustUp buttons have their behaviour specified below, but you can change this if you like
-//To change the quantity of a product, change the value of the input (with the class of buyInput), you can then recalculate the basket with refreshBasket()
+//To change the quantity of a product, change the value of the input (with the class of amount-to-buy-input), you can then recalculate the basket with refreshBasket()
 //Or you can adjust the basket object via javascript and call updateQuantityInputs() and refreshBasket()
-var cardTemplate = `<div class="shop-product card" data-num="[EVEGPRODUCT#]">
-<div class="shop-product-details shop-product-title card__title" data-field="title" data-num="[EVEGPRODUCT#]"></div>
-<div class="card__content" data-num="[EVEGPRODUCT#]">
-<div class="shop-product-details shop-product-img" data-field="img" data-num="[EVEGPRODUCT#]"></div>
-<div class="shop-product-details shop-product-price" data-field="price" data-num="[EVEGPRODUCT#]"></div>
-<div class="shop-product-details shop-product-units" data-field="units" data-num="[EVEGPRODUCT#]"></div>
-<div class="shop-product-buying" data-num="[EVEGPRODUCT#]">
-<div class="productBasketDiv"><button class="addToBasket">Add to Basket</button>
-<div class="adjustDiv"><button class="btn adjustDown">-</button>
-<input class="buyInput" data-num="[EVEGPRODUCT#]" min="0" value="0" type="number">
-<button class="btn adjustUp">+</button></div></div></div></div></div>`;
+var cardTemplate =
+    `<div class="shop-product card" data-num="[EVEGPRODUCT#]">
+          <div class="shop-product-img" data-field="img" data-num="[EVEGPRODUCT#]"></div>
+          <div class="shop-product-details"  data-num="[EVEGPRODUCT#]"> 
+            <div class="shop-product-title" data-field="title" data-num="[EVEGPRODUCT#]"></div>
+            <div class="shop-product-price shop-product-text" data-field="price" data-num="[EVEGPRODUCT#]"></div>
+            <div class="shop-product-units shop-product-text" data-field="units" data-num="[EVEGPRODUCT#]"></div>
+          </div>
+          <div class="shop-product-buying" data-num="[EVEGPRODUCT#]">
+                <button class="btn shop-product-basket-btn">Add to Basket</button>
+                <div class="shop-product-adjust-div" style="display: none">
+                    <button class="btn adjust-down-btn">-</button>
+                    <input class="amount-to-buy-input" data-num="[EVEGPRODUCT#]" min="0" value="0" type="text">
+                    <button class="btn adjust-up-btn">+</button>
+                </div>
+          </div>
+    </div>`;
 
   function init(){
     const toggleButton = document.getElementsByClassName('toggle-button')[0];
@@ -57,7 +63,7 @@ var cardTemplate = `<div class="shop-product card" data-num="[EVEGPRODUCT#]">
       document.getElementById('cookieMessage').style.display = 'none';
     });
 
-    if(getCookie("cookieMessageSeen") == "true"){
+    if(getCookie("cookieMessageSeen") === "true"){
       document.getElementById('cookieMessage').style.display = 'none';
     }
     initProducts(redraw);
@@ -71,23 +77,25 @@ var cardTemplate = `<div class="shop-product card" data-num="[EVEGPRODUCT#]">
   * Then it adds another event listener
   */
   function resetListeners(){
-    var elements = document.getElementsByClassName("adjustUp");
-    var eIn;
+    let eIn;
+
+    var elements = document.getElementsByClassName("adjust-up-btn");
     for(eIn = 0; eIn < elements.length; eIn++){
       elements[eIn].removeEventListener("click",increment);
       elements[eIn].addEventListener("click",increment);
     }
-    elements = document.getElementsByClassName("adjustDown");
+
+    elements = document.getElementsByClassName("adjust-down-btn");
     for(eIn = 0; eIn < elements.length; eIn++){
       elements[eIn].removeEventListener("click",decrement);
       elements[eIn].addEventListener("click",decrement);
     }
-    elements = document.getElementsByClassName("buyInput");
+    elements = document.getElementsByClassName("amount-to-buy-input");
     for(eIn = 0; eIn < elements.length; eIn++){
       elements[eIn].removeEventListener("change",inputchange);
       elements[eIn].addEventListener("change",inputchange);
     }
-    elements = document.getElementsByClassName("addToBasket");
+    elements = document.getElementsByClassName("shop-product-basket-btn");
     for(eIn = 0; eIn < elements.length; eIn++){
       elements[eIn].removeEventListener("click",increment);
       elements[eIn].addEventListener("click",increment);
@@ -95,43 +103,58 @@ var cardTemplate = `<div class="shop-product card" data-num="[EVEGPRODUCT#]">
   }
 
 
-  //When the input changes, add a 'bought' class if more than one is added
-  function inputchange(ev){
-    var thisID = ev.target.parentElement.closest(".card__content").getAttribute("data-num");
-    changeQuantity(thisID,ev.target.parentElement.closest(".shop-product-buying").getElementsByTagName("input")[0].value);
-  }
-
   /*
   * Change the quantity of the product with productID
   */
-  function changeQuantity(productID, newQuantity){
-    basket[productID] = newQuantity;
-    if(newQuantity == 0)
+  function changeQuantity(productID, newQuantity, shopProductBuying){
+
+
+    let addToBasket = shopProductBuying.getElementsByClassName("shop-product-basket-btn")[0]
+    let adjustDiv = shopProductBuying.getElementsByClassName("shop-product-adjust-div")[0]
+
+    console.log(newQuantity)
+
+    if(newQuantity === 0) {
+      adjustDiv.style.display = "none"
+      addToBasket.style.display = "block"
       delete basket[productID];
-    document.querySelector(".buyInput[data-num='"+productID+"']").value = newQuantity;
+    } else {
+      addToBasket.style.display = "none"
+      adjustDiv.style.display = "block"
+      basket[productID] = newQuantity;
+    }
+    shopProductBuying.getElementsByClassName("amount-to-buy-input")[0].value = newQuantity;
+
     refreshBasket();
+  }
+
+  //When the input changes, add a 'bought' class if more than one is added
+  function inputchange(ev){
+    let shopProductBuying = ev.target.parentElement.closest(".shop-product-buying");
+    let thisID = parseInt(shopProductBuying.getAttribute("data-num"));
+    let newValue = shopProductBuying.getElementsByTagName("input")[0].value
+    if (newValue >= 0)
+      changeQuantity(thisID, newValue, shopProductBuying);
   }
 
   //Add 1 to the quantity
   function increment(ev){
-    var thisID = ev.target.parentElement.closest(".card__content").getAttribute("data-num");
-    if(basket[thisID] === undefined){
-      basket[thisID] = 0;
-    }
-    changeQuantity(thisID,parseInt(basket[thisID])+1);
+    let shopProductBuying = ev.target.parentElement.closest(".shop-product-buying");
+    let thisID = parseInt(shopProductBuying.getAttribute("data-num"));
+
+    let previousValue = basket[thisID] === undefined ? 0 : basket[thisID]
+    changeQuantity(thisID,previousValue + 1, shopProductBuying);
   }
 
   //Subtract 1 from the quantity
-  function decrement(ev){
-    var thisID = ev.target.parentElement.closest(".card__content").getAttribute("data-num");
-    if(basket[thisID] === undefined){
-      changeQuantity(thisID,0);
-    }else{
-      if(basket[thisID] > 0){
-        changeQuantity(thisID,parseInt(basket[thisID])-1);
-      }
-    }
-  }
+function decrement(ev){
+  let shopProductBuying = ev.target.parentElement.closest(".shop-product-buying");
+  let thisID = parseInt(shopProductBuying.getAttribute("data-num"));
+
+  let previousValue = basket[thisID] === undefined ? 0 : basket[thisID]
+  if (previousValue > 0)
+    changeQuantity(thisID,previousValue - 1, shopProductBuying);
+}
 
   function filterFunction(a){
     /*This demonstrates how to filter based on the search term*/
@@ -149,55 +172,51 @@ var cardTemplate = `<div class="shop-product card" data-num="[EVEGPRODUCT#]">
 
   //Redraw all products based on the card template
   function redraw(){
-    
-    //Reset the product list (there are possibly more efficient ways of doing this, but this is simplest)
-    document.querySelector('.productList').innerHTML = '';
 
-    var shownProducts = productDetails.filter(filterFunction);
+    //Reset the product list (there are possibly more efficient ways of doing this, but this is simplest)
+    let productListHTML = document.querySelector('.productList');
+    productListHTML.innerHTML = '';
+
+    const shownProducts = productDetails.filter(filterFunction);
 
     shownProducts.sort(sortFunction);
 
-    var numProducts = shownProducts.length;
-    
-    for(var i = 0; i < numProducts; i++){
-      var cardHTML = cardTemplate.replaceAll("[EVEGPRODUCT#]",shownProducts[i].productID);
-      var thisProduct = document.createElement("div");
+    shownProducts.forEach((product) => {
+      const cardHTML = cardTemplate.replaceAll("[EVEGPRODUCT#]", product.productID);
+      const thisProduct = document.createElement("div");
       thisProduct.innerHTML = cardHTML;
-      document.querySelector('.productList').appendChild(thisProduct.firstChild);
-    }
 
-    document.querySelectorAll(".shop-product-details").forEach(function(element){
-      var field = element.getAttribute("data-field");
-      var num = element.getAttribute("data-num");
-      switch(field){
-        case "title":
-          element.innerText = productDetails[num].name;
-          break;
-        case "img":
-          element.innerHTML = "<span class=\"imgspacer\"></span><img src=\"images/"+productDetails[num].image + "\"></img>";
-          break;
-        case "price":
-          element.innerHTML = "<span>£"+(productDetails[num].price/100).toFixed(2)+"</span>";
-          break;
-        case "units":
-          element.innerHTML = "<span>"+productDetails[num].packsize + " " + productDetails[num].units+"</span>";
-          break;
-      }
+      let productCard = thisProduct.firstElementChild
 
-    });
+      productCard.getElementsByClassName("shop-product-img").item(0)
+          .innerHTML = `<span class=\"imgspacer\"></span><img src=${"images/"+product.image} alt=${product.name}>`;
+
+      let productDetails = productCard.getElementsByClassName("shop-product-details").item(0)
+
+      productDetails.getElementsByClassName("shop-product-title").item(0)
+          .innerHTML = product.name;
+
+      productDetails.getElementsByClassName("shop-product-price").item(0)
+          .innerHTML = "<span>£"+(product.price/100).toFixed(2)+"</span>";
+
+      productDetails.getElementsByClassName("shop-product-units").item(0)
+          .innerHTML = "<span>"+product.packsize + " " + product.units+"</span>";
+
+      productListHTML.appendChild(thisProduct.firstChild);
+    })
+
     resetListeners();
     updateQuantityInputs();
   }
-  
+
   window.addEventListener("load", init);
 
   function updateQuantityInputs(){
-    for(let buyInput of document.querySelectorAll(".buyInput")){
-      let quantity = basket[buyInput.getAttribute("data-num")];
-      if(isNaN(quantity))
-        quantity = 0;
-
-      buyInput.value = quantity;
+    for(let productCard of document.querySelectorAll(".shop-product")){
+      let buyInput = productCard.getElementsByClassName("shop-product-buying")[0]
+      let productID = buyInput.getAttribute("data-num")
+      let currentQuantity = isNaN(basket[productID]) ? 0 : basket[productID] ;
+      changeQuantity(productID, currentQuantity, buyInput)
     }
   }
 
@@ -213,7 +232,7 @@ var cardTemplate = `<div class="shop-product card" data-num="[EVEGPRODUCT#]">
     try{
       document.querySelector("#basketNumTotal").innerHTML = (total / 100).toFixed(2);
     }catch(e){
-      
+
     }
     return total;
   }

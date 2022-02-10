@@ -38,22 +38,18 @@ var cardTemplate =
     });
 
     const searchBar = document.getElementsByClassName('search-bar')[0];
-    //Show the search bar when the search link is pressed
-    document.getElementById('search-link').addEventListener('click',()=>{
       searchBar.classList.toggle('active');
-      document.getElementById('searchbox').focus();
-    });
 
-    //Close the search bar
+    //Do the search
     document.getElementById('searchbutton').addEventListener('click', ()=>{
       searchStr = document.getElementById('searchbox').value;
       redraw();
     });
 
-    //Close the search bar
+    //Close the search
     document.getElementById('closesearchbutton').addEventListener('click', ()=>{
       searchStr = "";
-      searchBar.classList.remove('active');
+      document.getElementById('searchbox').value = "";
       redraw();
     });
 
@@ -170,6 +166,7 @@ function decrement(ev){
     return a.price > b.price;
   }
 
+
   //Redraw all products based on the card template
   function redraw(){
 
@@ -180,6 +177,14 @@ function decrement(ev){
     const shownProducts = productDetails.filter(filterFunction);
 
     shownProducts.sort(sortFunction);
+
+    if (shownProducts.length == 0) {
+      productListHTML.innerHTML = `
+      <div style="text-align:center">
+        <p>No results found for this search term!</p>
+      </div>
+    `;
+    }
 
     shownProducts.forEach((product) => {
       const cardHTML = cardTemplate.replaceAll("[EVEGPRODUCT#]", product.productID);
@@ -236,4 +241,3 @@ function decrement(ev){
     }
     return total;
   }
-

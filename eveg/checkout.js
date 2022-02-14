@@ -17,11 +17,12 @@ document.getElementById("paycreditcard").removeEventListener("click",showCreditC
 document.getElementById("paycreditcard").addEventListener('click',showCreditCardPage);
 }
 
-//When the pay by credit card link is clicked, show the creditcard.html in an iframe
+//When the payment button link is clicked, show the payment.html in an iframe
+
 function showCreditCardPage(){
   if(!creditCardShown){
     var payIFrame = document.createElement("iframe");
-    payIFrame.src = "creditcard.html";
+    payIFrame.src = "payment.html";
     payIFrame.width = "50%";
   
     document.querySelector('#customerDetails').appendChild(payIFrame);

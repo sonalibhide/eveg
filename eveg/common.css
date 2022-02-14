@@ -12,7 +12,6 @@ h1{
 }
 
 
-
 .searchbuttons span{
     color: white;
     width: 1em;
@@ -264,23 +263,32 @@ a:visited{
 }
 
 
-form.customerDetails {
-background: #f9f9f9;
-border: 1px solid #c1c1c1;
-width: 50%;
+/*To return to shop from checkout page*/
+.back-button button{
+    margin: 0px 0px 100px 50px;
 }
 
-form.customerDetails label {
-display: block;
+
+/*Checkout page*/
+
+.row {
+    display: flex;
+}
+  
+  /* Creates two equal columns that sits next to each other */
+.columns {
+    float: left;
+    width: 50%;
 }
 
-form.customerDetails input {
-width: 80%;
-}
-form.customerDetails button{
-    margin-top:20px;
-    display: block;
-}
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+/*For basket contents*/
 
 .checkoutList{
     width:50%;
@@ -303,3 +311,60 @@ form.customerDetails button{
     text-align: right;
 }
 
+/*Table for basket contents*/
+.table{
+    height: 100px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+
+/*Customer details*/
+
+form.customerDetails{
+    /* too see the border
+    border-style: solid;
+    border-width: 2px;
+    */
+    
+    margin: 0 150px 50px 50px;
+
+}
+
+/*For the labels above the input i.e. first name*/
+form.customerDetails label {
+    display: block;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/*For the boxes where user inputs*/ 
+form.customerDetails input {
+    width: 70%;
+    margin-top: 10px;
+}
+
+/*For headings, i.e. your contact details*/ 
+form.customerDetails h2{
+    font-style: oblique;
+    font-weight: bold;
+}
+
+/*For payment button below, i.e. your contact details*/ 
+form.customerDetails button{
+    margin-top:30px;
+    display: block;
+    border: 3px solid black;
+}
+
+/*added horizontal line between user contact details and delivery address*/
+hr {
+    width: 70%;
+    margin: 50px 0;
+    border: 1px solid black;
+
+}

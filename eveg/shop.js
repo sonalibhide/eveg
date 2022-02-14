@@ -46,11 +46,20 @@ var cardTemplate =
       redraw();
     });
 
-    //Close the search
-    document.getElementById('closesearchbutton').addEventListener('click', ()=>{
-      searchStr = "";
-      document.getElementById('searchbox').value = "";
-      redraw();
+    document.getElementById('searchbox').addEventListener('input', function (e) { 
+      let length = e.currentTarget.value; 
+      if (length==0) {
+        searchStr = "";
+        document.getElementById('searchbox').value = "";
+        redraw();
+      };
+    }); 
+
+    document.getElementById('searchbox').addEventListener("keyup", function(event) {
+      event.preventDefault();
+      if (event.keyCode === 13) {
+        document.getElementById("searchbutton").click();
+      }
     });
 
     //Close the cookies message

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="ENG">
     <head>
         <meta charset="UTF-8"/>
         <link rel="stylesheet" media="screen and (max-width: 600px)" href="shopmobile.css">
         <link rel="stylesheet" media="screen and (min-width: 601px)" href="shop.css">
         <link rel="stylesheet" href="common.css">
+        <link rel="stylesheet" href="checkout.css">
         <link rel="stylesheet" href="colours.css">
         <script src="products.js"></script>
         <script src="checkout.js"></script>
@@ -63,6 +64,23 @@
         <div class="columns">
           <h2>Basket Contents</h2>
           <table class="checkoutList">
+            <thead>
+              <tr>
+                <th style="text-align: left">Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="basketList">
+
+            </tbody>
+            <thead>
+              <tr style="border-top:12px solid black">
+                <th colspan="3" style="text-align: right">Basket Total:</th>
+                <th id="basketTotal">0</th>
+              </tr>
+            </thead>
           </table>
         </div>
 

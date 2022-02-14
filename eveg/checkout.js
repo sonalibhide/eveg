@@ -36,21 +36,66 @@ function showCreditCardPage(){
 function calculateBasket(){
   let total = 0;
   let basket = JSON.parse(getCookie("basket"));
-  document.querySelector('.checkoutList').innerHTML = '';
+
+  let checkoutList = document.querySelector('#basketList')
+
+  checkoutList.innerHTML = ''
+
   for(const productID in basket){
+    console.log(productID)
     let quantity = basket[productID];
     let price = productDetails[productID].price;
     let productTotal = price * quantity;
     total = total + productTotal;
-    let rowHTML = `<td>${productDetails[productID].name}</td><td>${quantity}</td><td>${(price / 100).toFixed(2)}</td><td>£${(productTotal / 100).toFixed(2)}</td>`;
-    var thisProduct = document.createElement("tr");
+
+    let rowHTML = `
+            <td>${productDetails[productID].name}</td>
+            <td>
+                <div style="width: 9em">
+                    <input style="display: inline; width: 7em" class="amount-to-buy-input" min="0" value="${quantity}" type="number" onchange="changeAmountInBasket(this)">
+                    <button style="display: inline; width: 2em" onclick="removeItemFromBasket(this)">✖</button>
+                </div>
+                
+              </td>
+            <td>£${(price / 100).toFixed(2)} </td>
+            <td>£${(productTotal / 100).toFixed(2)}</td>`;
+
+
+    let thisProduct = document.createElement("tr");
+    thisProduct.setAttribute("data-num", productID)
     thisProduct.innerHTML = rowHTML;
-    document.querySelector('.checkoutList').appendChild(thisProduct);
+    checkoutList.appendChild(thisProduct);
   }
-  let rowHTML = `<td colspan="3">Total:</td><td>£${(total / 100).toFixed(2)}</td>`;
-  var thisProduct = document.createElement("tr");
-  thisProduct.innerHTML = rowHTML;
-  document.querySelector('.checkoutList').appendChild(thisProduct);
+
+  if (Object.keys(basket).length === 0) {
+    rowHTML = `
+        <td colspan="4" style="text-align: center; font-weight: normal">The basket is empty!</td>`;
+    let emptyBasketColumn = document.createElement("tr");
+    emptyBasketColumn.innerHTML = rowHTML;
+    checkoutList.appendChild(emptyBasketColumn).appendChild(document.createElement("tr"));
+  }
+
+  document.getElementById("basketTotal").innerHTML = `£${(total / 100).toFixed(2)}`
+}
+
+
+function removeItemFromBasket(el) {
+  let productId = parseInt(el.closest("tr").getAttribute("data-num"))
+  let basket = JSON.parse(getCookie("basket"));
+  delete basket[productId]
+  setCookie('basket', JSON.stringify(basket));
+  calculateBasket()
+}
+
+function changeAmountInBasket(el) {
+  console.log(el.parentElement)
+  let productId = parseInt(el.closest("tr").getAttribute("data-num"))
+  let basket = JSON.parse(getCookie("basket"));
+  console.log(productId)
+  basket[productId] = parseInt(el.value)
+  console.log(basket)
+  setCookie('basket', JSON.stringify(basket));
+  calculateBasket()
 }
 
 window.addEventListener("load", init);

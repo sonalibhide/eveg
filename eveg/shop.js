@@ -10,17 +10,17 @@ let basket = {};
 //Or you can adjust the basket object via javascript and call updateQuantityInputs() and refreshBasket()
 var cardTemplate =
     `<div class="shop-product card" data-num="[EVEGPRODUCT#]">
-          <div class="shop-product-img" data-field="img" data-num="[EVEGPRODUCT#]"></div>
-          <div class="shop-product-details"  data-num="[EVEGPRODUCT#]"> 
-            <div class="shop-product-title" data-field="title" data-num="[EVEGPRODUCT#]"></div>
-            <div class="shop-product-price shop-product-text" data-field="price" data-num="[EVEGPRODUCT#]"></div>
-            <div class="shop-product-units shop-product-text" data-field="units" data-num="[EVEGPRODUCT#]"></div>
+          <div class="shop-product-img" data-field="img"></div>
+          <div class="shop-product-details"> 
+            <div class="shop-product-title" data-field="title"></div>
+            <div class="shop-product-price shop-product-text" data-field="price"></div>
+            <div class="shop-product-units shop-product-text" data-field="units"></div>
           </div>
-          <div class="shop-product-buying" data-num="[EVEGPRODUCT#]">
+          <div class="shop-product-buying">
                 <button class="btn shop-product-basket-btn">Add to Basket</button>
                 <div class="shop-product-adjust-div" style="display: none">
                     <button class="btn adjust-down-btn">-</button>
-                    <input class="amount-to-buy-input" data-num="[EVEGPRODUCT#]" min="0" value="0" type="text">
+                    <input class="amount-to-buy-input" min="0" value="0" type="text">
                     <button class="btn adjust-up-btn">+</button>
                 </div>
           </div>
@@ -108,8 +108,6 @@ var cardTemplate =
     let addToBasket = shopProductBuying.getElementsByClassName("shop-product-basket-btn")[0]
     let adjustDiv = shopProductBuying.getElementsByClassName("shop-product-adjust-div")[0]
 
-    console.log(newQuantity)
-
     if(newQuantity === 0) {
       adjustDiv.style.display = "none"
       addToBasket.style.display = "block"
@@ -126,8 +124,9 @@ var cardTemplate =
 
   //When the input changes, add a 'bought' class if more than one is added
   function inputchange(ev){
-    let shopProductBuying = ev.target.parentElement.closest(".shop-product-buying");
-    let thisID = parseInt(shopProductBuying.getAttribute("data-num"));
+    let shopProduct = ev.target.parentElement.closest(".shop-product");
+    let shopProductBuying = shopProduct.getElementsByClassName("shop-product-buying")[0]
+    let thisID = parseInt(shopProduct.getAttribute("data-num"));
     let newValue = shopProductBuying.getElementsByTagName("input")[0].value
     if (newValue >= 0)
       changeQuantity(thisID, newValue, shopProductBuying);
@@ -135,8 +134,9 @@ var cardTemplate =
 
   //Add 1 to the quantity
   function increment(ev){
-    let shopProductBuying = ev.target.parentElement.closest(".shop-product-buying");
-    let thisID = parseInt(shopProductBuying.getAttribute("data-num"));
+    let shopProduct = ev.target.parentElement.closest(".shop-product");
+    let shopProductBuying = shopProduct.getElementsByClassName("shop-product-buying")[0]
+    let thisID = parseInt(shopProduct.getAttribute("data-num"));
 
     let previousValue = basket[thisID] === undefined ? 0 : basket[thisID]
     changeQuantity(thisID,previousValue + 1, shopProductBuying);
@@ -144,8 +144,9 @@ var cardTemplate =
 
   //Subtract 1 from the quantity
 function decrement(ev){
-  let shopProductBuying = ev.target.parentElement.closest(".shop-product-buying");
-  let thisID = parseInt(shopProductBuying.getAttribute("data-num"));
+  let shopProduct = ev.target.parentElement.closest(".shop-product");
+  let shopProductBuying = shopProduct.getElementsByClassName("shop-product-buying")[0]
+  let thisID = parseInt(shopProduct.getAttribute("data-num"));
 
   let previousValue = basket[thisID] === undefined ? 0 : basket[thisID]
   if (previousValue > 0)
@@ -178,7 +179,7 @@ function decrement(ev){
 
     shownProducts.sort(sortFunction);
 
-    if (shownProducts.length == 0) {
+    if (shownProducts.length === 0) {
       productListHTML.innerHTML = `
       <div style="text-align:center">
         <p>No results found for this search term!</p>

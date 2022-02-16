@@ -2,14 +2,12 @@
 <html>
 <head>
   <meta charset="UTF-8"/>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SONALI, YOU NEED TO COPY THIS LINE! -->
   <link rel="stylesheet" media="screen and (max-width: 600px)" href="shopmobile.css">
   <link rel="stylesheet" media="screen and (min-width: 601px)" href="shop.css">
   <link rel="stylesheet" href="common.css">
   <link rel="stylesheet" href="colours.css">
   <script src="products.js"></script>
   <script src="shop.js"></script>
-
   <title>E-Veg Shop</title>
   <style>
     #cookieMessage{
@@ -19,7 +17,7 @@
   </style>
 </head>
 <body>
-    <div class="hero"><a href="index.html"><div class="title">E-Veg</div></a>
+    <div class="hero"><a href="index.html"><div class="title">E-Veg</div></a></div>
     <div class="navbar">
       <div class="toggle-wrapper">
       <a href="#" class="toggle-button">
@@ -30,10 +28,24 @@
     </div>
       <div class="navbar-links">
         <ul>
+          <li><a href="#"><span>E-Veg</span></a></li>
           <li><a href="contact.html"><span>Contact</span></a></li>
-          <li><a id="search-link" href="#"><span>Search</span></a></li>
+          <!--<li><a id="search-link" href="#"><span>Search</span></a></li>-->
           <li><a href="about.html"><span>About</span></a></li>
           <li class="spacer">&nbsp;</li>
+          <!--<li class="welcome"  style="color: black;"><a>Welcome Test User</a></li>-->
+
+
+          <div class="search-bar">
+            <input type="search" placeholder="Search Here!" id="searchbox"></input>
+            <div class="searchbuttons">
+              <a id="searchbutton" href="#">
+                <span>
+                  search
+                  </span>
+              </a>
+              </div>
+          </div>
           <li><a class="basket" href="checkout.html"><span>
             Checkout</span></a></li>
         </ul>
@@ -41,24 +53,16 @@
 
     </div>
 
-    <div class="search-bar">
-      <input type="text" id="searchbox"></input>
+    <!--<div class="search-bar">
+      <input type="search" id="searchbox"></input>
       <div class="searchbuttons">
         <a id="searchbutton" href="#">
           <span>
             search
             </span>
         </a>
-        <a id="closesearchbutton" href="#">
-
-          <span>
-            close
-          </span>
-        </a>
-        
         </div>
-    </div>
-  </div>
+    </div>-->
     <div class="productList">
 
     </div>

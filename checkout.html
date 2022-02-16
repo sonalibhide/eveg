@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ENG">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" media="screen and (max-width: 600px)" href="shopmobile.css">
+        <link rel="stylesheet" media="screen and (min-width: 601px)" href="shop.css">
+        <link rel="stylesheet" href="common.css">
+        <link rel="stylesheet" href="checkout.css">
+        <link rel="stylesheet" href="colours.css">
+        <script src="products.js"></script>
+        <script src="checkout.js"></script>
+        <title>E-Veg Shop</title>
+      </head>
+    <body>
+      <div class="hero"><a href="index.html"><div class="title">E-Veg</div></a></div>
+      <div class="navbar">
+        <div class="toggle-wrapper">
+        <a href="#" class="toggle-button">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </a>
+      </div>
+        <div class="navbar-links">
+          <ul>
+            <li><a href="#"><span>E-Veg</span></a></li>
+            <li><a href="contact.html"><span>Contact</span></a></li>
+            <!--<li><a id="search-link" href="#"><span>Search</span></a></li>-->
+            <li><a href="about.html"><span>About</span></a></li>
+            <li class="spacer">&nbsp;</li>
+            <!--<li class="welcome"  style="color: black;"><a>Welcome Test User</a></li>-->
+
+
+            <div class="search-bar">
+              <input type="search" placeholder="Search Here!" id="searchbox"></input>
+              <div class="searchbuttons">
+                <a id="searchbutton" href="#">
+                  <span>
+                    search
+                    </span>
+                </a>
+                </div>
+            </div>
+            <li><a class="back" href="index.html"><span>
+              back to shopping</span></a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <!-- Left column for the customer details-->
+        <div class="columns">
+          <form class="customerDetails" action="payment.html">
+
+            <h2> Your contact details</h2>
+            <label for="firstName">First Name:</label><input type="text" name="firstName" value="First Name" disabled="true">
+            <label for="lastName">Last Name:</label><input type="text" name="lastName" value="Last Name" disabled="true">
+            <label for="emailAddress">Email Address:</label><input type="text" name="emailAddress" value="testuser@example.org" disabled="true">
+            <label for="contactNumber">Contact number:</label><input type="text" name="contactNumber" value="Contact Number" disabled="true">
+            <hr/> <!-- added horizontal line-->
+
+            <h2> Your delivery addresss</h2>
+            <label for="delAddressOne">Address Line 1:</label><input type="text" name="delAddressOne" value="1 Example Avenue, Example Town, EX4 7AL" disabled="true">
+            <label for="delAddressTwo">Address Line 2 (if applicable):</label><input type="text" name="delAddressTwo" value="2 Example Avenue, Example Town, EX4 7AL" disabled="true">
+            <button>Proceed to payment</button>
+          </form>
+        </div>
+
+        <!-- Right column for the basket-->
+        <div class="columns">
+          <h2>Basket Contents</h2>
+          <table class="checkoutList">
+            <thead>
+              <tr>
+                <th style="text-align: left">Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="basketList">
+
+            </tbody>
+            <thead>
+              <tr style="border-top:12px solid black">
+                <th colspan="3" style="text-align: right">Basket Total:</th>
+                <th id="basketTotal">0</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="about">
+        <div>&copy; 2021 InterVeg Coventry Ltd.</div>
+        <div>Fresh produce from the Midland's green countryside.</div>
+      </div>
+
+
+    </body>
+</html>

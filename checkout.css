@@ -1,0 +1,105 @@
+
+/*Checkout page*/
+
+.row {
+    display: flex;
+}
+
+/* Creates two equal columns that sits next to each other */
+.columns {
+    float: left;
+    width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/*For basket contents*/
+
+.checkoutList{
+    width:50%;
+    margin-bottom: 4rem;
+    margin-top: 2rem;
+}
+
+.checkoutList {
+    text-align: right;
+}
+
+.checkoutList td, .checkoutList tr {
+    padding-left: 40px;
+}
+
+.checkoutList td:first-child, .checkoutList tr th:first-child  {
+    text-align: left;
+    padding-left: 0;
+    padding-right: 20px;
+}
+
+.checkoutList tr td:nth-child(4){
+    font-weight: bold;
+}
+
+
+
+/*Table for basket contents*/
+.table{
+    height: 100px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+
+/*Customer details*/
+
+form.customerDetails{
+    /* too see the border
+    border-style: solid;
+    border-width: 2px;
+    */
+
+    margin: 0 150px 50px 50px;
+
+}
+
+/*For the labels above the input i.e. first name*/
+form.customerDetails label {
+    display: block;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/*For the boxes where user inputs*/
+form.customerDetails input {
+    width: 70%;
+    margin-top: 10px;
+}
+
+/*For headings, i.e. your contact details*/
+form.customerDetails h2{
+    font-style: oblique;
+    font-weight: bold;
+}
+
+/*For payment button below, i.e. your contact details*/
+form.customerDetails button{
+    margin-top:30px;
+    display: block;
+    border: 3px solid black;
+}
+
+/*added horizontal line between user contact details and delivery address*/
+hr {
+    width: 70%;
+    margin: 50px 0;
+    border: 1px solid black;
+
+}

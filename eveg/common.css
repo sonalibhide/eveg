@@ -33,7 +33,7 @@ h1{
     border-radius: 2em;
     box-shadow: 5px 5px #808080;
     border:0;
-    border-bottom:1px solid #555;  
+    border-bottom:1px solid #555;
     width:0;
     padding-left: 2em;
     padding-right: 2em;
@@ -47,12 +47,12 @@ h1{
 
 .search-bar{
     display: none;
-    padding-bottom: 18px;
-    padding-top: 4px;
+    padding-bottom: 10px;
+    padding-top: 5px;
 }
 
 .searchbuttons a span{
-    color: black;
+    color: #f8833aff;
 }
 
 html{
@@ -86,7 +86,10 @@ html{
 }
 
 .navbar{
-    height: 4em;
+    height: 2em;
+    background-color: #333;
+    position: sticky;
+    top: 0;
 }
 
 .navbar,li ul {
@@ -95,6 +98,10 @@ html{
     align-items: center;
     color: white;
     padding-top: 0.5em;
+}
+
+.navbar li a:hover{
+    background-color: white;
 }
 
 .about{
@@ -132,9 +139,9 @@ html{
 }
 
 .navbar-links li a, .subnavbar-links li a{
-    color: var(--colour-1);
+    color: #abfaa9ff;
     text-decoration: none;
-    font-size:1.5em;
+    font-size:1.3em;
     font-weight: 600;
     min-width: 4em;
     text-align: center;
@@ -151,12 +158,19 @@ html{
 
 .navbar-links ul li:hover ul{
     display:flex;
+    background-color: white;
+    height: 2em;
+}
+
+.navbar-links ul a:hover{
+    color: black;
 }
 
 .navbar-links li ul{
     position:absolute;
     display: flex;
 }
+
 .toggle-wrapper{
     position:absolute;
     top: .75rem;
@@ -215,6 +229,10 @@ html{
 .hero{
     text-align: center;
     height: var(--hero-height);
+    background: url(images/background/Eveg-background.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:10px,10px;
 }
 
 .hero div.title{
@@ -223,7 +241,8 @@ html{
     width: 100%;
     height: calc(100% - 6rem);
     display: inline-block;
-    color: var(--colour-1);
+    color: #2f6c23ff;
+    font-family: "Lucida Handwriting", Cursive;
 }
 
 .imgspacer{
@@ -250,7 +269,7 @@ p{
 }
 
 body{
-    background-color: var(--colour-2);
+    background-color: white;
     margin:0;
     padding: 0;
 }
@@ -268,3 +287,25 @@ a:visited{
     margin: 0px 0px 100px 50px;
 }
 
+@media screen and (max-width: 600px) {
+  .navbar a:not(:first-child) {display: none;}
+  .navbar a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 600px) {
+  .navbar.responsive {position: relative;}
+  .navbar.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .navbar.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}

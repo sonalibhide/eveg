@@ -49,6 +49,7 @@
 .shop-product-basket-btn{
     width: 100%;
     height: 100%;
+    background-color: black;
 }
 
 .shop-product-adjust-div{
@@ -71,4 +72,3 @@
 .amount-to-buy-input{
     height: 80%;
 }
-

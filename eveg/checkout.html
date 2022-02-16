@@ -12,40 +12,47 @@
         <title>E-Veg Shop</title>
       </head>
     <body>
-      <div class="navbar-links">
-        <ul>
-          <li><a href="#"><span>Contact</span></a></li>
-          <li><a href="#"><span>About</span></a></li>
-          <li class="spacer">&nbsp;</li>
-          <li class="welcome"><a>Welcome Test User</a></li>
-          <li><a class="basket" href="checkout.html"><span>
-            Checkout</span></a></li>
-        </ul>
+      <div class="hero"><a href="index.html"><div class="title">E-Veg</div></a></div>
+      <div class="navbar">
+        <div class="toggle-wrapper">
+        <a href="#" class="toggle-button">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </a>
       </div>
+        <div class="navbar-links">
+          <ul>
+            <li><a href="#"><span>E-Veg</span></a></li>
+            <li><a href="contact.html"><span>Contact</span></a></li>
+            <!--<li><a id="search-link" href="#"><span>Search</span></a></li>-->
+            <li><a href="about.html"><span>About</span></a></li>
+            <li class="spacer">&nbsp;</li>
+            <!--<li class="welcome"  style="color: black;"><a>Welcome Test User</a></li>-->
 
-      <div class="hero"><div class="title">E-Veg</div>
 
-        <div class="navbar">
-          <div class="toggle-wrapper">
-          <a href="#" class="toggle-button">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </a>
-          </div>
-    
+            <div class="search-bar">
+              <input type="search" placeholder="Search Here!" id="searchbox"></input>
+              <div class="searchbuttons">
+                <a id="searchbutton" href="#">
+                  <span>
+                    search
+                    </span>
+                </a>
+                </div>
+            </div>
+            <li><a class="back" href="index.html"><span>
+              back to shopping</span></a></li>
+          </ul>
         </div>
+
       </div>
-      
-      <div class = "back-button">
-        <button onclick="document.location='index.html'">Back to shopping</button>
-      </div>
-      
-      <div class="row">        
+
+      <div class="row">
         <!-- Left column for the customer details-->
         <div class="columns">
           <form class="customerDetails" action="payment.html">
-            
+
             <h2> Your contact details</h2>
             <label for="firstName">First Name:</label><input type="text" name="firstName" value="First Name" disabled="true">
             <label for="lastName">Last Name:</label><input type="text" name="lastName" value="Last Name" disabled="true">
@@ -55,11 +62,11 @@
 
             <h2> Your delivery addresss</h2>
             <label for="delAddressOne">Address Line 1:</label><input type="text" name="delAddressOne" value="1 Example Avenue, Example Town, EX4 7AL" disabled="true">
-            <label for="delAddressTwo">Address Line 2 (if applicable):</label><input type="text" name="delAddressTwo" value="2 Example Avenue, Example Town, EX4 7AL" disabled="true">                
+            <label for="delAddressTwo">Address Line 2 (if applicable):</label><input type="text" name="delAddressTwo" value="2 Example Avenue, Example Town, EX4 7AL" disabled="true">
             <button>Proceed to payment</button>
           </form>
-        </div>   
-        
+        </div>
+
         <!-- Right column for the basket-->
         <div class="columns">
           <h2>Basket Contents</h2>
@@ -85,12 +92,12 @@
         </div>
 
       </div>
-    
+
       <div class="about">
         <div>&copy; 2021 InterVeg Coventry Ltd.</div>
         <div>Fresh produce from the Midland's green countryside.</div>
       </div>
 
-    
-    </body> 
+
+    </body>
 </html>

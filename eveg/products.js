@@ -58,6 +58,7 @@ var imagesArr = [["Artichokes","veg","reut-malichi-GQ62pYNohW0-unsplash.jpg","1"
 
 function initProducts(callback){
     productDetails = [];
+    imagesArr = imagesArr.sort();
     for(var i = 0; i < imagesArr.length; i++){
       var thisProduct = {name: imagesArr[i][0], type: imagesArr[i][1], image: imagesArr[i][2], 
         packsize: imagesArr[i][3], units: imagesArr[i][4], price: imagesArr[i][5], productID: i};
@@ -88,4 +89,8 @@ function getCookie(cname) {
     }
   }
   return "";
+}
+
+function myfucnota(){
+  var x = document.getElementById("cookieMessage").style.display = "none";
 }

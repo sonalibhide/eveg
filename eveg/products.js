@@ -51,7 +51,7 @@ var imagesArr = [["Artichokes","veg","reut-malichi-GQ62pYNohW0-unsplash.jpg","1"
 ["Crisps", "other","mustafa-bashari-S4PC4SeKwKg-unsplash.jpg",6,"unit",275],
 ["Eggs","other","nick-fewings-qlLCBkTSYAI-unsplash.jpg",6,"unit",110],
 ["Orange Juice","other","paul-hanaoka-8WYjqXqNZs4-unsplash.jpg",1,"pint",180],
-["Rice","other","pierre-bamin--LdilhDx3sk-unsplash.jpg",2000,"g",130],
+["Rice","other","pierre-bamin--LdilhDx3sk-unsplash.jpg",2,"kg",130],
 ["Chocolate Bar","other","tamas-pap-6IDGTjq_Pic-unsplash.jpg",1,"unit",190],
 ["Peanut Butter","other","tetiana-bykovets-Ht7ZhGt2UXg-unsplash.jpg",300,"g",210]
 ];
